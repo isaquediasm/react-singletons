@@ -45,11 +45,12 @@ export const Popup = new Singleton(
 );
 
 import { Popup } from "./Popup";
+
 Popup.mount();
 Popup.unmount();
 ```
 
-## Passing the props
+## Passing props
 
 ```tsx
 import * as React from "react";
@@ -64,6 +65,7 @@ export const Popup = new Singleton(
 );
 
 import { Popup } from "./Popup";
+
 Popup.mount({ title: "Hello!" });
 Popup.unmount();
 ```
