@@ -69,3 +69,27 @@ import { Popup } from "./Popup";
 Popup.mount({ title: "Hello!" });
 Popup.unmount();
 ```
+
+## Using typescript
+
+```tsx
+import * as React from "react";
+import { Singleton } from "react-singletons";
+
+interface IProps {
+  title: string;
+}
+
+export const Popup = new Singleton<IProps>(
+  class extends Component<IProps, {}> {
+    public render(): React.ReactNode {
+      return <div>Popup ${this.props.title}!</div>;
+    }
+  }
+);
+
+import { Popup } from "./Popup";
+
+Popup.mount({ title: "Hello!" });
+Popup.unmount();
+```
