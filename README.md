@@ -30,22 +30,22 @@ $ npm install react-singletons
 
 To get started import the Singleton component from `react-singletons`. Then instead of exporting your component. Wrap and export it into a Singleton as shown below.
 
-## Example using
+## Example usage
 
 The example usign is using props and TypeScript, but both are not required.
 
 ```tsx
 import * as React from "react";
-import { Component } from "react";
+import { Component, ReactNode } from "react";
 import { Singleton } from "react-singletons";
 
 interface IProps {
   title: string;
 }
 
-export const Popup = new Singleton(
-  class extends Component {
-    public render() {
+export const Popup = new Singleton<IProps>(
+  class extends Component<IProps, {}> {
+    public render(): ReactNode {
       return <div>Popup {this.props.title}!</div>;
     }
   }
