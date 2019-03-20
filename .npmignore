@@ -11,5 +11,6 @@ logs
 # *.d.ts
 # *.js
 *.ts
+*.tsx
 
 .github
