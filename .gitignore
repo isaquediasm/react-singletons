@@ -10,6 +10,6 @@ logs
 *.js.map
 *.d.ts
 *.js
-#.ts
+# *.ts
 
-#.github
+# .github
