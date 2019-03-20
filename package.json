@@ -1,0 +1,35 @@
+{
+  "name": "react-singletons",
+  "version": "1.0.0",
+  "description": "In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one 'single' instance. This is useful when exactly one object is needed to coordinate actions across the system. The term comes from the mathematical concept of a singleton.",
+  "main": "source/Export.js",
+  "scripts": {
+    "start": "tsc --watch",
+    "compile": "tsc",
+    "prepublish": "npm run compile",
+    "clean": "rm -f ./source/*.js && rm -f ./source/*.d.ts && rm -f ./source/*.js.map && rm -f ./source/*.ts.map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elraccoone/react-singletons.git"
+  },
+  "keywords": [
+    "React",
+    "Singleton",
+    "Pattern"
+  ],
+  "author": "Jeffrey Lanters",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/elraccoone/react-singletons/issues"
+  },
+  "homepage": "https://github.com/elraccoone/react-singletons/wiki",
+  "dependencies": {
+    "react": "16.4.1",
+    "react-dom": "16.8.4"
+  },
+  "devDependencies": {
+    "@types/react": "16.8.8",
+    "@types/react-dom": "16.8.2"
+  }
+}
