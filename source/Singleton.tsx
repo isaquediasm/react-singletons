@@ -5,8 +5,7 @@ import * as ReactDom from "react-dom";
 export class Singleton<IProps> {
   private targetElement: HTMLElement = this.createTargetElement();
   private isActive: boolean = false;
-  private componentInstance: JSX.Element | undefined = undefined;
-  private props: IProps | undefined = undefined;
+  private jsxInstance: JSX.Element | undefined = undefined;
 
   constructor(protected component: ComponentType<any>) {}
 
@@ -14,10 +13,9 @@ export class Singleton<IProps> {
     if (this.isActive === true) {
       this.unmount();
     }
-    this.props = props;
     this.isActive = true;
-    this.componentInstance = <this.component {...this.props} />;
-    ReactDom.render(this.componentInstance, this.targetElement);
+    this.jsxInstance = <this.component {...props} />;
+    ReactDom.render(this.jsxInstance, this.targetElement);
   }
 
   public unmount(): void {
@@ -26,6 +24,10 @@ export class Singleton<IProps> {
 
   public getInstance(): ComponentType<any> {
     return this.component;
+  }
+
+  public addEventListener(eventName: string, callback: () => void): void {
+    //
   }
 
   private createTargetElement(): HTMLElement {

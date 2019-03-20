@@ -34,6 +34,7 @@ To get started import the Singleton component from `react-singletons`. Then inst
 
 ```tsx
 import * as React from "react";
+import { Component } from "react";
 import { Singleton } from "react-singletons";
 
 export const Popup = new Singleton(
@@ -54,6 +55,7 @@ Popup.unmount();
 
 ```tsx
 import * as React from "react";
+import { Component } from "react";
 import { Singleton } from "react-singletons";
 
 export const Popup = new Singleton(
@@ -70,26 +72,14 @@ Popup.mount({ title: "Hello!" });
 Popup.unmount();
 ```
 
-## Using typescript
+## Using the Typescript typings
 
 ```tsx
-import * as React from "react";
-import { Singleton } from "react-singletons";
-
 interface IProps {
   title: string;
 }
 
 export const Popup = new Singleton<IProps>(
-  class extends Component<IProps, {}> {
-    public render(): React.ReactNode {
-      return <div>Popup ${this.props.title}!</div>;
-    }
-  }
+  class extends Component<IProps, {}> {}
 );
-
-import { Popup } from "./Popup";
-
-Popup.mount({ title: "Hello!" });
-Popup.unmount();
 ```
