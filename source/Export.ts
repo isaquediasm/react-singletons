@@ -1,1 +1,1 @@
-export { Singleton } from "./Singleton";
+export { Singleton } from "./Models/Singleton";

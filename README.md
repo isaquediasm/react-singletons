@@ -28,58 +28,34 @@ $ npm install react-singletons
 
 # Usage
 
-To get started import the Singleton component from `react-singletons`. Then instead of exporting your component. Wrap it into a Singleton as shown below.
+To get started import the Singleton component from `react-singletons`. Then instead of exporting your component. Wrap and export it into a Singleton as shown below.
 
-## Simple usage
+## Example using
 
-```tsx
-import * as React from "react";
-import { Component } from "react";
-import { Singleton } from "react-singletons";
-
-export const Popup = new Singleton(
-  class extends Component {
-    public render() {
-      return <div>Popup!</div>;
-    }
-  }
-);
-
-import { Popup } from "./Popup";
-
-Popup.mount();
-Popup.unmount();
-```
-
-## Passing props
+The example usign is using props and TypeScript, but both are not required.
 
 ```tsx
 import * as React from "react";
 import { Component } from "react";
 import { Singleton } from "react-singletons";
 
-export const Popup = new Singleton(
-  class extends Component {
-    public render() {
-      return <div>Popup ${this.props.title}!</div>;
-    }
-  }
-);
-
-import { Popup } from "./Popup";
-
-Popup.mount({ title: "Hello!" });
-Popup.unmount();
-```
-
-## Using the Typescript typings
-
-```tsx
 interface IProps {
   title: string;
 }
 
-export const Popup = new Singleton<IProps>(
-  class extends Component<IProps, {}> {}
+export const Popup = new Singleton(
+  class extends Component {
+    public render() {
+      return <div>Popup {this.props.title}!</div>;
+    }
+  }
 );
+```
+
+```tsx
+import { Popup } from "./Popup";
+
+Popup.mount({ title: "Hello!" });
+Popup.updateProps({ title: "Bye!" });
+Popup.unmount();
 ```
