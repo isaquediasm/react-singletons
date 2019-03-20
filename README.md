@@ -60,14 +60,12 @@ Popup.updateProps({ title: "Bye!" });
 Popup.unmount();
 ```
 
-## Event listener
+## Event listeners
 
 ```tsx
 export const Popup = new Singleton<IProps>(
   class extends Component<IProps, {}> {
-    public render(): ReactNode {
-      return <div>Popup {this.props.title}!</div>;
-    }
+    // ...
   },
   new SingletonEventListener("test", () => {
     Test.updateProps({ title: "Test succesfull!" });
