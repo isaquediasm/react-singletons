@@ -4,24 +4,23 @@ import * as ReactDom from "react-dom";
 
 export class Singleton<IProps> {
   private targetElement: HTMLElement = this.createTargetElement();
-  private isInitialized: boolean = false;
   private isActive: boolean = false;
   private componentInstance: JSX.Element | undefined = undefined;
+  private props: IProps | undefined = undefined;
 
   constructor(protected component: ComponentType<any>) {}
 
-  public show(props?: IProps): void {
+  public mount(props?: IProps): void {
     if (this.isActive === true) {
-      this.hide();
+      this.unmount();
     }
-    if (this.isInitialized === false) {
-      this.isActive = true;
-      this.componentInstance = <this.component {...props} />;
-      ReactDom.render(this.componentInstance, this.targetElement);
-    }
+    this.props = props;
+    this.isActive = true;
+    this.componentInstance = <this.component {...this.props} />;
+    ReactDom.render(this.componentInstance, this.targetElement);
   }
 
-  public hide(): void {
+  public unmount(): void {
     ReactDom.unmountComponentAtNode(this.targetElement);
   }
 

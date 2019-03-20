@@ -1,13 +1,13 @@
 <div align="center">
 
 [![license](https://img.shields.io/badge/license-Apache_2.0-red.svg)]()
-[![npm](https://img.shields.io/npm/v/react-unity-webgl.svg)]()
+[![npm](https://img.shields.io/npm/v/react-singletons.svg)]()
 [![npm](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![npm](https://img.shields.io/npm/dt/react-unity-webgl.svg)]()
+[![npm](https://img.shields.io/npm/dt/react-singletons.svg)]()
 [![npm](https://img.shields.io/badge/supported-typescript-2a507e.svg)]()
 [![npm](https://img.shields.io/badge/supported-babel-yellow.svg)]()
 
-When building content for the web, you might need to communicate with elements on a webpage. Or you might want to implement functionality using Web APIs which Unity does not currently expose by default. In both cases, you need to directly interface with the browser’s JavaScript engine. React Unity WebGL provides an easy solution for embedding Unity WebGL builds in your React application, with two-way communication between your React and Unity application with advanced API's.
+React Singletons brings the singleton pattern to React components. In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one 'single' instance. This is useful when exactly one object is needed to coordinate actions across the system. The term comes from the mathematical concept of a singleton.
 
 **&Lt;**
 [**My other Modules**](https://github.com/elraccoone) &middot;
@@ -20,7 +20,7 @@ Made with &hearts; by Jeffrey Lanters
 
 # Installation
 
-Install using npm. Make sure you download the release matching with your Unity version. I try to update this plugin in case of need as fast as possible. Check the [releases on GitHub](https://github.com/jeffreylanters/react-unity-webgl/releases) for the corresponding version or [view on NPM](https://www.npmjs.com/package/react-unity-webgl).
+Install using npm.
 
 ```sh
 $ npm install react-singletons
@@ -30,25 +30,40 @@ $ npm install react-singletons
 
 To get started import the Singleton component from `react-singletons`. Then instead of exporting your component. Wrap it into a Singleton as shown below.
 
-## Typscript
+## Simple usage
 
 ```tsx
 import * as React from "react";
 import { Singleton } from "react-singletons";
 
-export const Popup = new Singleton<IProps>(
-  class extends Component<IProps, IState> {
-    public render(): ReactNode {
-      return <div>Warning! {this.props.message}</div>;
+export const Popup = new Singleton(
+  class extends Component {
+    public render() {
+      return <div>Popup!</div>;
     }
   }
 );
+
+import { Popup } from "./Popup";
+Popup.mount();
+Popup.unmount();
 ```
 
-```tsx
-import { Popup } from "./Popup";
+## Passing the props
 
-Popup.show();
-Popup.show({ message: "Oopsie!" });
-Popup.close();
+```tsx
+import * as React from "react";
+import { Singleton } from "react-singletons";
+
+export const Popup = new Singleton(
+  class extends Component {
+    public render() {
+      return <div>Popup ${this.props.title}!</div>;
+    }
+  }
+);
+
+import { Popup } from "./Popup";
+Popup.mount({ title: "Hello!" });
+Popup.unmount();
 ```
