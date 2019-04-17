@@ -59,18 +59,3 @@ Popup.mount({ title: "Hello!" });
 Popup.updateProps({ title: "Bye!" });
 Popup.unmount();
 ```
-
-## Event listeners
-
-```tsx
-export const Popup = new Singleton<IProps>(
-  class extends Component<IProps, {}> {
-    // ...
-  },
-  new SingletonEventListener("test", () => {
-    Test.updateProps({ title: "Test succesfull!" });
-  })
-);
-
-Popup.send("test");
-```
