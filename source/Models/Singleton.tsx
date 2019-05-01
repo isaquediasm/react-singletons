@@ -6,6 +6,7 @@ import { SingletonComponentWrapper } from "../Components/SingletonComponentWrapp
 export class Singleton<IProps> {
   private scwInstance?: SingletonComponentWrapper;
   private unmountDelayHandle: number = -1;
+  private updateDelayHandle: number = -1;
 
   constructor(protected component: ComponentType<any>) {
     ReactDom.render(
@@ -17,23 +18,30 @@ export class Singleton<IProps> {
     );
   }
 
-  public mount(props: IProps, unmountAfterMs?: number): void {
+  public mount(props: IProps): Singleton<IProps> {
     if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         wrappedProps: props,
         shouldBeMounted: true
       });
-    if (typeof unmountAfterMs !== "undefined") this.unmount(unmountAfterMs);
+    return this;
   }
 
-  public update(props: IProps): void {
-    if (typeof this.scwInstance !== "undefined")
+  public update(props: IProps, delayMs?: number): Singleton<IProps> {
+    window.clearTimeout(this.updateDelayHandle);
+    if (typeof delayMs !== "undefined")
+      this.updateDelayHandle = window.setTimeout(
+        () => this.update(props),
+        delayMs
+      );
+    else if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         wrappedProps: props
       });
+    return this;
   }
 
-  public unmount(delayMs?: number): void {
+  public unmount(delayMs?: number): Singleton<IProps> {
     window.clearTimeout(this.unmountDelayHandle);
     if (typeof delayMs !== "undefined")
       this.unmountDelayHandle = window.setTimeout(
@@ -44,5 +52,6 @@ export class Singleton<IProps> {
       this.scwInstance.setState({
         shouldBeMounted: false
       });
+    return this;
   }
 }

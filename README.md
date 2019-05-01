@@ -52,14 +52,22 @@ export const Popup = new Singleton<IProps>(
 );
 ```
 
-```tsx
+```ts
 import { Popup } from "./Popup";
 
 Popup.mount({ title: "Hello!" });
-Popup.mount({ title: "Hello!" }, 1000 /* unmount after(ms) */);
+Popup.mount({ title: "Hello!" });
 
 Popup.update({ title: "Bye!" });
+Popup.update({ title: "Bye!" }, 1000); // delay(ms)
 
 Popup.unmount();
-Popup.unmount(1000); /* delay(ms) */
+Popup.unmount(1000); // delay(ms)
+```
+
+```ts
+// All events are chainable
+Popup.mount({ title: "Hello!" })
+  .update({ title: "Bye!" }, 1000)
+  .unmount(2000);
 ```
