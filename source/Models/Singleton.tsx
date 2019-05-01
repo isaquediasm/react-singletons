@@ -34,11 +34,11 @@ export class Singleton<IProps> {
 
   public unmount(delay?: number): void {
     window.clearTimeout(this.unmountDelayHandle);
-    if (typeof this.scwInstance !== "undefined")
+    if (typeof delay !== "undefined")
+      this.unmountDelayHandle = window.setTimeout(() => this.unmount(), delay);
+    else if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         shouldBeMounted: false
       });
-    if (typeof delay !== "undefined")
-      this.unmountDelayHandle = window.setTimeout(() => this.unmount(), delay);
   }
 }
