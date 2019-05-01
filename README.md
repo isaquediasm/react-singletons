@@ -56,6 +56,7 @@ export const Popup = new Singleton<IProps>(
 import { Popup } from "./Popup";
 
 Popup.mount({ title: "Hello!" });
-Popup.updateProps({ title: "Bye!" });
+Popup.update({ title: "Bye!" });
 Popup.unmount();
+Popup.unmount(1000); /* delay 1000ms */
 ```

@@ -1,6 +1,6 @@
 {
   "name": "react-singletons",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React Singletons brings the singleton pattern to React components.",
   "main": "source/Export.js",
   "scripts": {
@@ -24,10 +24,6 @@
     "url": "https://github.com/elraccoone/react-singletons/issues"
   },
   "homepage": "https://github.com/elraccoone/react-singletons/wiki",
-  "dependencies": {
-    "react": "16.4.1",
-    "react-dom": "16.8.4"
-  },
   "devDependencies": {
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.2"

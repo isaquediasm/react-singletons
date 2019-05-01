@@ -2,17 +2,12 @@ import * as React from "react";
 import * as ReactDom from "react-dom";
 import { ComponentType } from "react";
 import { SingletonComponentWrapper } from "../Components/SingletonComponentWrapper";
-import { SingletonEventListener } from "./SingletonEventListener";
 
 export class Singleton<IProps> {
   private scwInstance?: SingletonComponentWrapper;
-  private eventListeners: SingletonEventListener[] = [];
+  private unmountDelayHandle: number = -1;
 
-  constructor(
-    protected component: ComponentType<any>,
-    ...eventListeners: SingletonEventListener[]
-  ) {
-    this.eventListeners = eventListeners;
+  constructor(protected component: ComponentType<any>) {
     ReactDom.render(
       <SingletonComponentWrapper
         referenceCallback={(_instance: any) => (this.scwInstance = _instance)}
@@ -30,24 +25,20 @@ export class Singleton<IProps> {
       });
   }
 
-  public updateProps(props: IProps): void {
+  public update(props: IProps): void {
     if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         wrappedProps: props
       });
   }
 
-  public unmount(): void {
+  public unmount(delay?: number): void {
+    window.clearTimeout(this.unmountDelayHandle);
     if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         shouldBeMounted: false
       });
-  }
-
-  public send(eventName: string): void {
-    if (typeof this.scwInstance !== "undefined")
-      for (let _eventListener of this.eventListeners)
-        if (_eventListener.eventName === eventName)
-          _eventListener.eventCallback();
+    if (typeof delay !== "undefined")
+      this.unmountDelayHandle = window.setTimeout(() => this.unmount(), delay);
   }
 }
