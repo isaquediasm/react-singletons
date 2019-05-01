@@ -17,12 +17,13 @@ export class Singleton<IProps> {
     );
   }
 
-  public mount(props: IProps): void {
+  public mount(props: IProps, unmountAfterMs?: number): void {
     if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         wrappedProps: props,
         shouldBeMounted: true
       });
+    if (typeof unmountAfterMs !== "undefined") this.unmount(unmountAfterMs);
   }
 
   public update(props: IProps): void {
@@ -32,10 +33,13 @@ export class Singleton<IProps> {
       });
   }
 
-  public unmount(delay?: number): void {
+  public unmount(delayMs?: number): void {
     window.clearTimeout(this.unmountDelayHandle);
-    if (typeof delay !== "undefined")
-      this.unmountDelayHandle = window.setTimeout(() => this.unmount(), delay);
+    if (typeof delayMs !== "undefined")
+      this.unmountDelayHandle = window.setTimeout(
+        () => this.unmount(),
+        delayMs
+      );
     else if (typeof this.scwInstance !== "undefined")
       this.scwInstance.setState({
         shouldBeMounted: false
