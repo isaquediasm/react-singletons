@@ -1,13 +1,12 @@
 {
   "name": "react-singletons",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React Singletons brings the singleton pattern to React components.",
-  "main": "source/Export.js",
+  "main": "distribution/Export.js",
   "scripts": {
     "start": "tsc --watch",
     "compile": "tsc",
-    "prepublish": "npm run compile",
-    "clean": "rm -f ./source/*.js && rm -f ./source/*.d.ts && rm -f ./source/*.js.map && rm -f ./source/*.ts.map"
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
